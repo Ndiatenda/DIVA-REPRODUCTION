@@ -202,6 +202,7 @@ class qy(nn.Module):
 class DIVA(nn.Module):
     def __init__(self, args):
         super(DIVA, self).__init__()
+        self.device = torch.device("cuda" if torch.cuda.is_available() else "cpu")
         self.zd_dim = args.zd_dim
         self.zx_dim = args.zx_dim
         self.zy_dim = args.zy_dim
@@ -231,7 +232,9 @@ class DIVA(nn.Module):
         self.beta_x = args.beta_x
         self.beta_y = args.beta_y
 
-        self.cuda()
+        # self.cuda()
+        if torch.cuda.is_available():
+            self.cuda()
 
     def forward(self, d, x, y):
         # Encode
@@ -259,8 +262,10 @@ class DIVA(nn.Module):
         zd_p_loc, zd_p_scale = self.pzd(d)
 
         if self.zx_dim != 0:
-            zx_p_loc, zx_p_scale = torch.zeros(zd_p_loc.size()[0], self.zx_dim).cuda(),\
-                                   torch.ones(zd_p_loc.size()[0], self.zx_dim).cuda()
+            # zx_p_loc, zx_p_scale = torch.zeros(zd_p_loc.size()[0], self.zx_dim).cuda(),\
+            #                        torch.ones(zd_p_loc.size()[0], self.zx_dim).cuda()
+            zx_p_loc = torch.zeros(zd_p_loc.size()[0], self.zx_dim).to(self.device)
+            zx_p_scale = torch.ones(zd_p_loc.size()[0], self.zx_dim).to(self.device)
         zy_p_loc, zy_p_scale = self.pzy(y)
 
         # Reparameterization trick
@@ -297,8 +302,10 @@ class DIVA(nn.Module):
 
             zd_p_loc, zd_p_scale = self.pzd(d)
             if self.zx_dim != 0:
-                zx_p_loc, zx_p_scale = torch.zeros(zd_p_loc.size()[0], self.zx_dim).cuda(), \
-                                       torch.ones(zd_p_loc.size()[0], self.zx_dim).cuda()
+                # zx_p_loc, zx_p_scale = torch.zeros(zd_p_loc.size()[0], self.zx_dim).cuda(), \
+                #                        torch.ones(zd_p_loc.size()[0], self.zx_dim).cuda()
+                zx_p_loc, zx_p_scale = torch.zeros(zd_p_loc.size()[0], self.zx_dim).to(self.device), \
+                                       torch.ones(zd_p_loc.size()[0], self.zx_dim).to(self.device)
 
             pzd = dist.Normal(zd_p_loc, zd_p_scale)
 
@@ -328,7 +335,7 @@ class DIVA(nn.Module):
             # Create labels and repeats of zy_q and qzy
             y_onehot = torch.eye(10)
             y_onehot = y_onehot.repeat(1, 100)
-            y_onehot = y_onehot.view(1000, 10).cuda()
+            y_onehot = y_onehot.view(1000, 10).to(self.device)
 
             zy_q = zy_q.repeat(10, 1)
             zy_q_loc, zy_q_scale = zy_q_loc.repeat(10, 1), zy_q_scale.repeat(10, 1)
@@ -352,7 +359,7 @@ class DIVA(nn.Module):
 
             marginal_zy_p_minus_zy_q = torch.sum(prob_qy * zy_p_minus_zy_q)
 
-            prior_y = torch.tensor(1/10).cuda()
+            prior_y = torch.tensor(1/10).to(self.device)
             prior_y_minus_qy = torch.log(prior_y) - qy.log_prob(y_onehot)
             marginal_prior_y_minus_qy = torch.sum(prob_qy * prior_y_minus_qy)
 

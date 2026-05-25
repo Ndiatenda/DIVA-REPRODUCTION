@@ -1,0 +1,6 @@
+diva_env/
+__pycache__/
+*.pyc
+dataset/MNIST/
+*.model
+paper_experiments/rotated_mnist/dataset/MNIST/
