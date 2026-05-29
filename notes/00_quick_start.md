@@ -50,3 +50,5 @@ seaborn: 0.9.0
 scikit-image: 0.14.1
 scikit-learn: 0.19.1
 
+Note:
+PyTorch 1.0.1 was originally targeted but was not installable easily on this Windows/Python setup. PyTorch 1.7.0+cpu was used for local smoke testing.
