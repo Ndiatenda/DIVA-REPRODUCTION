@@ -103,3 +103,9 @@ This failed with HTTP 404.
 Temporary local fix was made inside the virtual environment’s torchvision MNIST file by replacing URLs with:
 
 https://ossci-datasets.s3.amazonaws.com/mnist/
+
+Important:
+This change is not committed because it was inside diva_env.
+
+Need a cleaner repo-level solution later.
+
