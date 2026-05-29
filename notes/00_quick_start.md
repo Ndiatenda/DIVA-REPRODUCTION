@@ -71,4 +71,24 @@ MNIST is downloaded into: paper_experiments/rotated_mnist/dataset/MNIST/
 
 This folder is ignored by Git.
 
+The repo already contains supervised index files:
+
+paper_experiments/rotated_mnist/dataset/supervised_inds_0.npy
+
+paper_experiments/rotated_mnist/dataset/supervised_inds_1.npy
+
 ## Local Compatibility Fixes Already Made
+
+1. CPU compatibility in model_diva.py
+
+Original code assumed CUDA and used .cuda() directly.
+
+Local fix:
+Use device-aware logic.
+
+Example:
+
+self.device = torch.device("cuda" if torch.cuda.is_available() else "cpu")
+
+and replace hardcoded CUDA tensors with:
+.to(self.device)
