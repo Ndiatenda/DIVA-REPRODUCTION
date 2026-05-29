@@ -62,3 +62,5 @@ PYTHONPATH=../../.. python experiment_only_sup_diva.py
 
 Important: run from inside the supervised experiment folder.
 
+Reason:
+The script uses old relative paths such as: ../../dataset/
