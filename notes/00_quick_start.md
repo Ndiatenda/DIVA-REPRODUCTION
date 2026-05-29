@@ -18,6 +18,8 @@ Use:
 
 bash
 git checkout baseline-diva
+
 Windows path: C:\Users\raeda\Documents\research\PhD\DIVA-REPRODUCTION
+
 Git Bash Path: ~/Documents/research/PhD/DIVA-REPRODUCTION
  
