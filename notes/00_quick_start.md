@@ -16,10 +16,12 @@ Reproduce the DIVA rotated-MNIST experiments first, then analyse the latent repr
 
 Use:
 
-bash
 git checkout baseline-diva
 
 Windows path: C:\Users\raeda\Documents\research\PhD\DIVA-REPRODUCTION
 
 Git Bash Path: ~/Documents/research/PhD/DIVA-REPRODUCTION
- 
+
+Activate environment: source diva_env/Scripts/activate
+
+
