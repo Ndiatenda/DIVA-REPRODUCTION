@@ -59,3 +59,6 @@ PyTorch 1.0.1 was originally targeted but was not installable easily on this Win
 cd paper_experiments/rotated_mnist/supervised
 
 PYTHONPATH=../../.. python experiment_only_sup_diva.py
+
+Important: run from inside the supervised experiment folder.
+
