@@ -33,7 +33,7 @@ Check Pytorch: python -c "import torch; print(torch.__version__); print(torch.cu
 1.7.0+cpu
 False  Expected 
 
-#Key Installed Versions:
+## Key Installed Versions:
 
 Python: 3.6.8
 
