@@ -92,3 +92,12 @@ self.device = torch.device("cuda" if torch.cuda.is_available() else "cpu")
 
 and replace hardcoded CUDA tensors with:
 .to(self.device)
+
+2. MNIST URL fix
+
+Old torchvision attempted to download from:
+http://yann.lecun.com/exdb/mnist/
+
+This failed with HTTP 404.
+
+Temporary local fix was made inside the virtual environment’s torchvision MNIST file by replacing URLs with:
