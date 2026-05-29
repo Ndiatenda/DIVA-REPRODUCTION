@@ -64,3 +64,15 @@ Important: run from inside the supervised experiment folder.
 
 Reason:
 The script uses old relative paths such as: ../../dataset/
+
+## Dataset
+
+MNIST is downloaded into: paper_experiments/rotated_mnist/dataset/MNIST/
+
+This folder is ignored by Git.
+
+The repo already contains supervised index files: 
+paper_experiments/rotated_mnist/dataset/supervised_inds_0.npy
+
+paper_experiments/rotated_mnist/dataset/supervised_inds_1.npy
+...
